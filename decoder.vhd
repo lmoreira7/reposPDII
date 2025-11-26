@@ -34,7 +34,7 @@ architecture behavior of decoder is
 				when "0000" => -- LW
 					
 					aluSrc <= '1';
-					regDst <= '0';
+					regDst <= '1';
 					aluControl <= "00";
 					memToReg <= '1';
 					memWrite <= '0';
@@ -153,9 +153,9 @@ architecture behavior of decoder is
 				
 				when "1011" => -- MULI
 				
-					aluSrc <= '0';
+					aluSrc <= '1';
 					regDst <= '1';
-					aluControl <= "00";
+					aluControl <= "10";
 					memToReg <= '0';
 					memWrite <= '0';
 					memRead <= '0';

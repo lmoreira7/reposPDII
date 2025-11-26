@@ -90,7 +90,20 @@ architecture behavior of monociclo is
 		
 		opcode <= op_code; -- Entrada do Decoder
 		
-		
+		memInst(0) <= 20x"81005"; -- LDI $1, 5
+		memInst(1) <= 20x"82003"; -- LDI $2, 3
+		memInst(2) <= 20x"14120"; -- ADD $4, $1, $2
+		memInst(3) <= 20x"25410"; -- SUB $5, $4, $1
+		memInst(4) <= 20x"93005"; -- ADDI $3, $0, 5
+		memInst(5) <= 20x"3A320"; -- MUL $10, $3, $2
+		memInst(6) <= 20x"50034"; -- BEQ $0, $3, salta p/ memInst(10)
+		memInst(7) <= 20x"B7202"; -- MULI $2, $2, 2
+		memInst(8) <= 20x"A3301"; -- SUBI $3, $3, 1
+		memInst(9) <= 20x"40006"; -- JMP memInst(6)
+		memInst(10) <= 20x"60242"; -- BNE $2, $4, salta p/ memInst(12)
+		memInst(11) <= 20x"4000A"; -- JMP memInst(10)
+		memInst(12) <= 20x"70205"; -- SW MemDados[5], $2
+		memInst(13) <= 20x"0F005"; -- LW $15 MemDados[5]
 		
 		------------------------------------------------------
 		
@@ -142,7 +155,7 @@ architecture behavior of monociclo is
 				
 				-------------------------- INCREMENTO DO PROGRAM COUNTER --------------------------
 					
-					if (op_code(2) = '0') or (op_code = "0101" and equal = '0') or (op_code = "0110" and equal = '1') then
+					if (op_code(2) = '0') or (op_code = "0101" and equal = '0') or (op_code = "0110" and equal = '1') or (op_code = "0111") then
 						
 						programCounter <= programCounter + 1;
 					
@@ -169,7 +182,7 @@ architecture behavior of monociclo is
 						
 							if memToReg = '1' then
 							
-								bancoRegs(conv_integer(regDestino)) <= memDadosOut;
+								bancoRegs(conv_integer(regDestino)) <= memDados(conv_integer(endereco));
 						
 							else
 						

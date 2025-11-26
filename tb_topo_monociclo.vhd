@@ -17,7 +17,7 @@ architecture behavior of tb_topo_monociclo is
 	
 		);
 	
-	end component
+	end component;
 	
 	signal clock_sg : std_logic := '0';
 	signal reset_sg : std_logic := '1';
@@ -29,7 +29,7 @@ architecture behavior of tb_topo_monociclo is
 			port map(
 				
 				clock => clock_sg,
-				reset => reset_sg,
+				reset => reset_sg
 				
 			);
 			
@@ -41,7 +41,7 @@ architecture behavior of tb_topo_monociclo is
 				
 				wait for 2 ps;
 					
-					reset_sg <= 0;
+					reset_sg <= '0';
 				
 				wait;
 				
